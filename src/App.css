@@ -1,5 +1,14 @@
-.add-padding {
-    background: orange !important;
+main {
+    height: calc(100vh - 56px);
 }
 
-/* use important as less as possible, like never */
+.hero {
+    background: url(https://wallpaperaccess.com/full/24954.jpg) no-repeat fixed center center/cover;
+    color: white;
+    height: 100%;
+}
+
+h1 {
+    margin-left: 40rem;
+    margin-bottom: 4.5rem;
+}
