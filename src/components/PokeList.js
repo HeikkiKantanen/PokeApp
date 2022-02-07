@@ -12,17 +12,19 @@ import PokeCard from './PokeCard';
 
 import axios from 'axios';
 
-const Pokelist = () => {
+const Pokelist = ({ favHandler, favourites }) => {
   const [pokemons, setPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [nextPokemons, setNextPokemons] = useState('https://pokeapi.co/api/v2/pokemon/');
+  const [nextPokemons, setNextPokemons] = useState('https://pokeapi.co/api/v2/pokemon?limit=50&offset=0');
 
   useEffect(() => {
     getPokemons();
   }, []);
 
   const getPokemons = () => {
-    axios.get(nextPokemons).catch(error => {
+    axios
+    .get(nextPokemons)
+    .catch(error => {
         console.log(error);
     }).then((res) => {
     const fetches = res.data.results.map((p) => 
@@ -57,11 +59,14 @@ const Pokelist = () => {
           image={pokemon.sprites.
             other.dream_world.
             front_default}
+            PokemonName={pokemon.name}
+            fav={favourites.some((item) => item.name == pokemon.name)}
+            favClick={() => favHandler(pokemon)}
         />
         ))}
       </Row>
       </Container>
-      <Button variant="primary" size="lg" onClick={getPokemons}>Load more</Button>
+      <Button variant="primary" size="lg" mt="5" onClick={getPokemons}>Load more</Button>
     </div>
   );
 };

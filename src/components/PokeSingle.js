@@ -1,0 +1,56 @@
+
+import React, { useEffect, useState} from 'react';
+
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Loader from './Loader';
+import { Button } from 'react-bootstrap';
+
+
+const PokeSingle = () => {
+    let { PokemonName } = useParams();
+    let navigate = useNavigate();
+
+    const [pokemon, setPokemon] = useState();
+    const [isLoading, setIsLoading ] = useState(true);
+
+    useEffect(() => {
+        axios
+        .get(`https://pokeapi.co/api/v2/pokemon/${PokemonName}`)
+        .catch(error => {
+            console.log(error);
+        })
+        .then((res) => {
+            setPokemon(res.data);
+            setIsLoading(false);
+        });
+        console.log(pokemon);
+    }, []);
+
+    return (
+        <div>
+            {isLoading && <Loader /> }
+            {!isLoading && (
+                <div>
+                    <h2>{pokemon.name.slice(0,1).toUpperCase() + pokemon.name.slice(1, pokemon.name.length)}</h2>
+                    <img src={pokemon.sprites.other.home.front_default} />
+                    <p>Base experience: {pokemon.base_experience}</p>
+                    <p>Height: {pokemon.height}0 cm</p>
+                    <p>Weight: {pokemon.weight} kg</p>
+                    <p>
+                        Types: {" "}
+                        <ul>
+                            {pokemon.types.map((item) => (
+                                <li key={item.type.name}>{item.type.name}</li>
+                            ))}
+                        </ul>
+                    </p>
+                </div>
+            )}
+            <Button onClick={() => navigate(-1)}>Back to list
+            </Button>
+        </div>
+    );
+};
+
+export default PokeSingle;
