@@ -7,6 +7,6 @@
 
 ## Application screenshots:
 
-![Screenshot of the lannding page](Screenshot_landingpage)
-![Screenshot of pokelist](Screenshot_pokelist)
-![Screenshot of favorites](Screenshot_favorites)
+![Screenshot of the lannding page](Screenshot_landingpage.png)
+![Screenshot of pokelist](Screenshot_pokelist.png)
+![Screenshot of favorites](Screenshot_favorites.png)
